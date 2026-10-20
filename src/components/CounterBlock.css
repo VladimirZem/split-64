@@ -1,0 +1,101 @@
+.counter__section {
+    position: relative;
+    padding: 100px 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #070f1e, #0a1628);
+  }
+  
+  .counter__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 170, 255, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(0, 200, 100, 0.06) 0%, transparent 60%);
+  }
+  
+  .counter__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .counter__title {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 800;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  
+  .counter__subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 15px;
+    margin-bottom: 60px;
+  }
+  
+  .counter__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 25px;
+  }
+  
+  .counter__item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.6s both;
+    cursor: default;
+  }
+  
+  .counter__item:hover {
+    background: rgba(0, 170, 255, 0.07);
+    border-color: rgba(0, 170, 255, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .counter__icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  .counter__num {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00aaff, #00cc66);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  
+  .counter__label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .counter__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }

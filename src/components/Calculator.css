@@ -1,0 +1,226 @@
+.calc__section {
+    position: relative;
+    padding: 100px 20px;
+    background: #070f1e;
+    overflow: hidden;
+  }
+  
+  .calc__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 50%, rgba(0, 170, 255, 0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 50%, rgba(0, 200, 100, 0.05) 0%, transparent 55%);
+  }
+  
+  .calc__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .calc__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .calc__badge {
+    display: inline-block;
+    background: rgba(0, 170, 255, 0.1);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    color: #00aaff;
+    padding: 7px 18px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  
+  .calc__title {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  
+  .calc__subtitle {
+    color: rgba(255,255,255,0.4);
+    font-size: 15px;
+  }
+  
+  /* BODY */
+  .calc__body {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    align-items: start;
+  }
+  
+  /* ФОРМА */
+  .calc__form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .calc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .calc__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+  
+  .calc__value-badge {
+    background: rgba(0, 170, 255, 0.15);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    color: #00aaff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 70px;
+    text-align: center;
+  }
+  
+  /* Range slider */
+  .calc__range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.1);
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .calc__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00aaff, #0066dd);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+    transition: transform 0.2s;
+  }
+  
+  .calc__range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+  
+  .calc__range::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00aaff, #0066dd);
+    cursor: pointer;
+    border: none;
+  }
+  
+  .calc__range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+  }
+  
+  /* Chips */
+  .calc__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .calc__chip {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+  }
+  
+  .calc__chip:hover {
+    border-color: rgba(0, 170, 255, 0.4);
+    color: #00aaff;
+  }
+  
+  .calc__chip.active {
+    background: rgba(0, 170, 255, 0.15);
+    border-color: rgba(0, 170, 255, 0.6);
+    color: #00aaff;
+    font-weight: 700;
+  }
+  
+  /* РЕЗУЛЬТАТ */
+  .calc__result {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0, 170, 255, 0.2);
+    border-radius: 24px;
+    padding: 35px 30px;
+    position: sticky;
+    top: 100px;
+    transition: all 0.4s;
+  }
+  
+  .calc__result.pulse {
+    border-color: rgba(0, 170, 255, 0.6);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.15);
+    transform: scale(1.01);
+  }
+  
+  .result__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  
+  .result__icon {
+    font-size: 28px;
+  }
+  
+  .result__header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .result__power {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  
+  .power__num {
+    font-size: 60px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00aaff, #00cc66);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    transition: all 0.3s;
+  }
+  
+  .power__unit {
+    font-size: 22px;
+  }  

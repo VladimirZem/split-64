@@ -1,0 +1,69 @@
+/* ========================================
+   АНИМАЦИИ
+   ======================================== */
+
+   @keyframes vane-swing {
+    0%, 100% { transform: rotate(-10deg); }
+    50%       { transform: rotate(10deg); }
+}
+
+@keyframes led-blink {
+    0%, 85%, 100% { opacity: 1; }
+    90%           { opacity: 0.1; }
+}
+
+@keyframes airflow-fall {
+    0%   { transform: translateY(-5px); opacity: 0; }
+    10%  { opacity: 1; }
+    75%  { opacity: 0.5; }
+    100% { transform: translateY(300px); opacity: 0; }
+}
+
+@keyframes snowflake-fall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg) scale(0.5); opacity: 0; }
+    8%   { opacity: 1; transform: translateY(10px) translateX(5px) rotate(40deg) scale(1); }
+    80%  { opacity: 0.7; }
+    100% { transform: translateY(380px) translateX(25px) rotate(400deg) scale(0.8); opacity: 0; }
+}
+
+@keyframes fog-drift {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(4%); }
+}
+
+@keyframes particle-float {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.2); }
+}
+
+@keyframes counter-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brand-shine {
+    0%   { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes pulse-ring {
+    0%   { transform: scale(1);    opacity: 0.6; }
+    100% { transform: scale(1.8);  opacity: 0; }
+}
+
+@keyframes float-badge {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}

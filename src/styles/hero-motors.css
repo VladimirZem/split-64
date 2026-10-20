@@ -1,0 +1,586 @@
+/* ========================================
+   ТЁМНАЯ ТЕМА — МОТОРЫ + ТРУБЫ
+   ======================================== */
+
+   .hero__motors {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    background: #0a0a0f;
+}
+
+/* ── Сетка ── */
+.motors__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(220, 38, 38, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(220, 38, 38, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-pulse 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes grid-pulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.9; }
+}
+
+/* ── Свечение ── */
+.motors__glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.motors__glow--1 {
+    width: 40vw;
+    height: 40vw;
+    max-width: 500px;
+    max-height: 500px;
+    top: -5%;
+    left: -5%;
+    background: radial-gradient(circle, rgba(220,38,38,0.15) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: gb1 3s ease-in-out infinite;
+}
+
+.motors__glow--2 {
+    width: 35vw;
+    height: 35vw;
+    max-width: 400px;
+    max-height: 400px;
+    bottom: -5%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(185,28,28,0.13) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: gb1 3s ease-in-out infinite 1s;
+}
+
+.motors__glow--3 {
+    width: 30vw;
+    height: 30vw;
+    max-width: 350px;
+    max-height: 350px;
+    top: 50%;
+    left: 50%;
+    background: radial-gradient(circle, rgba(239,68,68,0.07) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: gb3 3s ease-in-out infinite 2s;
+}
+
+@keyframes gb1 {
+    0%,100% { opacity: 0.6; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.08); }
+}
+@keyframes gb3 {
+    0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+}
+
+/* ==========================================
+   ТРУБЫ — SVG-ПОДХОД через абсолютные %
+   ========================================== */
+
+.motors__pipes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ── Базовая труба ── */
+.pipe {
+    position: absolute;
+    border-radius: 3px;
+}
+
+.pipe--h {
+    height: 10px;
+    background: linear-gradient(
+        180deg,
+        #333 0%, #1a1a1a 25%, #0d0d0d 50%, #1a1a1a 75%, #333 100%
+    );
+    box-shadow:
+        inset 0 1px 3px rgba(255,255,255,0.07),
+        inset 0 -1px 3px rgba(0,0,0,0.9),
+        0 0 14px rgba(220,38,38,0.2),
+        0 0 28px rgba(220,38,38,0.08);
+}
+
+.pipe--v {
+    width: 10px;
+    background: linear-gradient(
+        90deg,
+        #333 0%, #1a1a1a 25%, #0d0d0d 50%, #1a1a1a 75%, #333 100%
+    );
+    box-shadow:
+        inset 1px 0 3px rgba(255,255,255,0.07),
+        inset -1px 0 3px rgba(0,0,0,0.9),
+        0 0 14px rgba(220,38,38,0.2),
+        0 0 28px rgba(220,38,38,0.08);
+}
+
+/* ── Фланцы (болты на трубах) ── */
+.pipe__flange {
+    position: absolute;
+    background: linear-gradient(135deg, #444, #1a1a1a, #444);
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.08), 0 0 5px rgba(0,0,0,0.9);
+}
+
+.pipe--h .pipe__flange {
+    width: 8px;
+    top: -3px;
+    bottom: -3px;
+}
+
+.pipe--v .pipe__flange {
+    height: 8px;
+    left: -3px;
+    right: -3px;
+}
+
+/* ── Угловой узел (шаровой кран / тройник) ── */
+.pipe__node {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #444, #111);
+    border: 1.5px solid #333;
+    box-shadow:
+        0 0 10px rgba(0,0,0,0.9),
+        inset 0 1px 3px rgba(255,255,255,0.08),
+        0 0 8px rgba(220,38,38,0.15);
+    z-index: 4;
+    transform: translate(-50%, -50%);
+}
+
+/* ==============================================
+   РАСПОЛОЖЕНИЕ ТРУБ
+   
+   Моторы:
+   FAN-01 → left:4%,  top:6%   (центр ~left:10%, top:12%)
+   FAN-02 → right:4%, top:3%   (центр ~right:10%, top:9%)  
+   MAIN   → bottom:5%,left:50% (центр ~bottom:18%, left:50%)
+   ============================================== */
+
+/* ── ЛЕВАЯ стена (вертикаль) ── */
+/* от FAN-01 вниз до нижней горизонтали */
+.pipe--wall-left {
+    left: calc(4% + 5px); /* центр мотора */
+    top: 18%;             /* под мотором */
+    height: 44%;          /* до нижней трубы */
+}
+.pipe--wall-left .pipe__flange:nth-child(1) { top: 18%; }
+.pipe--wall-left .pipe__flange:nth-child(2) { top: 42%; }
+.pipe--wall-left .pipe__flange:nth-child(3) { top: 68%; }
+.pipe--wall-left .pipe__flange:nth-child(4) { top: 88%; }
+
+/* ── ПРАВАЯ стена (вертикаль) ── */
+/* от FAN-02 вниз до нижней горизонтали */
+.pipe--wall-right {
+    right: calc(4% + 5px);
+    top: 14%;
+    height: 48%;
+}
+.pipe--wall-right .pipe__flange:nth-child(1) { top: 15%; }
+.pipe--wall-right .pipe__flange:nth-child(2) { top: 38%; }
+.pipe--wall-right .pipe__flange:nth-child(3) { top: 62%; }
+.pipe--wall-right .pipe__flange:nth-child(4) { top: 85%; }
+
+/* ── Горизонталь FAN-01 → центр (верхняя) ── */
+.pipe--top-left {
+    top: 12%;
+    left: calc(4% + 10px); /* сразу после мотора */
+    right: 52%;
+}
+.pipe--top-left .pipe__flange:nth-child(1) { left: 20%; }
+.pipe--top-left .pipe__flange:nth-child(2) { left: 50%; }
+.pipe--top-left .pipe__flange:nth-child(3) { left: 78%; }
+
+/* ── Горизонталь FAN-02 → центр (верхняя) ── */
+.pipe--top-right {
+    top: 9%;
+    right: calc(4% + 10px);
+    left: 52%;
+}
+.pipe--top-right .pipe__flange:nth-child(1) { right: 20%; }
+.pipe--top-right .pipe__flange:nth-child(2) { right: 50%; }
+.pipe--top-right .pipe__flange:nth-child(3) { right: 78%; }
+
+/* ── Вертикаль центр → MAIN ── */
+.pipe--center-drop {
+    left: calc(50% - 5px);
+    top: 9%;
+    height: 48%;
+}
+.pipe--center-drop .pipe__flange:nth-child(1) { top: 15%; }
+.pipe--center-drop .pipe__flange:nth-child(2) { top: 40%; }
+.pipe--center-drop .pipe__flange:nth-child(3) { top: 68%; }
+.pipe--center-drop .pipe__flange:nth-child(4) { top: 88%; }
+
+/* ── Нижняя горизонталь левая (левая стена → MAIN) ── */
+.pipe--bot-left {
+    bottom: 22%;
+    left: calc(4% + 5px);
+    right: 52%;
+}
+.pipe--bot-left .pipe__flange:nth-child(1) { left: 12%; }
+.pipe--bot-left .pipe__flange:nth-child(2) { left: 35%; }
+.pipe--bot-left .pipe__flange:nth-child(3) { left: 60%; }
+.pipe--bot-left .pipe__flange:nth-child(4) { left: 84%; }
+
+/* ── Нижняя горизонталь правая (правая стена → MAIN) ── */
+.pipe--bot-right {
+    bottom: 22%;
+    right: calc(4% + 5px);
+    left: 52%;
+}
+.pipe--bot-right .pipe__flange:nth-child(1) { right: 12%; }
+.pipe--bot-right .pipe__flange:nth-child(2) { right: 35%; }
+.pipe--bot-right .pipe__flange:nth-child(3) { right: 60%; }
+.pipe--bot-right .pipe__flange:nth-child(4) { right: 84%; }
+
+/* ── Узлы соединений ── */
+
+/* Верхний центр (тройник top-left + top-right + center-drop) */
+.node--top-center   { top: 9%;     left: 50%; }
+
+/* Стык FAN-01 с горизонталью */
+.node--fan1-h       { top: 12%;    left: calc(4% + 10px); }
+
+/* Стык FAN-02 с горизонталью */
+.node--fan2-h       { top: 9%;     right: calc(4% + 10px); transform: translate(50%, -50%); }
+
+/* Левый верхний угол (wall-left + top-left) */
+.node--tl           { top: 12%;    left: calc(4% + 5px); }
+
+/* Правый верхний угол (wall-right + top-right) */
+.node--tr           { top: 9%;     right: calc(4% + 5px); transform: translate(50%, -50%); }
+
+/* Левый нижний угол (wall-left + bot-left) */
+.node--bl           { bottom: 22%; left: calc(4% + 5px); transform: translate(-50%, 50%); }
+
+/* Правый нижний угол (wall-right + bot-right) */
+.node--br           { bottom: 22%; right: calc(4% + 5px); transform: translate(50%, 50%); }
+
+/* Нижний центр левый (bot-left + center-drop) */
+.node--bot-cl       { bottom: 22%; left: calc(50% - 1px); transform: translate(-50%, 50%); }
+
+/* Нижний центр правый (bot-right + center-drop) */
+.node--bot-cr       { bottom: 22%; left: calc(50% + 9px); transform: translate(-50%, 50%); }
+
+/* ==========================================
+   МОТОРЫ (fan-unit)
+   ========================================== */
+
+.fan-unit {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 5;
+}
+
+/* FAN-01: левый верх — центр мотора совпадает с трубами */
+.fan-unit--1 {
+    top: 2%;
+    left: 1%;
+    --fan-size: clamp(80px, 10vw, 150px);
+    --fan-speed: 1.8s;
+    --fan-color: rgba(220,38,38,0.85);
+    --fan-glow:  rgba(220,38,38,0.4);
+}
+
+/* FAN-02: правый верх */
+.fan-unit--2 {
+    top: 1%;
+    right: 1%;
+    --fan-size: clamp(70px, 9vw, 130px);
+    --fan-speed: 1.3s;
+    --fan-color: rgba(185,28,28,0.9);
+    --fan-glow:  rgba(185,28,28,0.5);
+}
+
+/* MAIN: центр низ */
+.fan-unit--3 {
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    --fan-size: clamp(100px, 13vw, 190px);
+    --fan-speed: 0.9s;
+    --fan-color: rgba(239,68,68,0.9);
+    --fan-glow:  rgba(239,68,68,0.5);
+}
+
+/* ── Корпус ── */
+.fan__housing {
+    width: var(--fan-size);
+    height: var(--fan-size);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fan__ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    pointer-events: none;
+}
+
+.fan__ring--outer {
+    inset: 0;
+    border-color: rgba(220,38,38,0.4);
+    background: rgba(8,3,3,0.88);
+    box-shadow:
+        0 0 25px rgba(220,38,38,0.15),
+        inset 0 0 20px rgba(0,0,0,0.6);
+}
+
+.fan__ring--middle {
+    inset: 7px;
+    border-color: rgba(220,38,38,0.18);
+}
+
+/* ── Лопасти ── */
+.fan__blade-wrap {
+    width: 76%;
+    height: 76%;
+    position: relative;
+    animation: fan-spin var(--fan-speed) linear infinite;
+    z-index: 2;
+}
+
+.fan__blade {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44%;
+    height: 17%;
+    background: linear-gradient(90deg, var(--fan-color) 0%, rgba(220,38,38,0.2) 100%);
+    border-radius: 50% 8% 8% 50%;
+    transform-origin: 0% 50%;
+    transform: rotate(calc(var(--i) * 60deg)) translateY(-50%);
+    box-shadow: 0 0 8px var(--fan-glow);
+}
+
+.fan-unit--3 .fan__blade {
+    transform: rotate(calc(var(--i) * 45deg)) translateY(-50%);
+    width: 42%;
+    height: 15%;
+}
+
+@keyframes fan-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Центр ── */
+.fan__center {
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    z-index: 3;
+}
+
+.fan__hub {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #c41c1c, #3d0808);
+    border: 2px solid rgba(220,38,38,0.7);
+    animation: hub-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes hub-pulse {
+    0%,100% { box-shadow: 0 0 12px rgba(220,38,38,0.7), 0 0 25px rgba(220,38,38,0.3); }
+    50%      { box-shadow: 0 0 22px rgba(239,68,68,1),   0 0 45px rgba(239,68,68,0.4); }
+}
+
+/* ── Кольцо свечения ── */
+.fan__glow-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    box-shadow: 0 0 18px var(--fan-glow), 0 0 36px var(--fan-glow);
+    animation: glow-ring-pulse 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glow-ring-pulse {
+    0%,100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+}
+
+/* ── Подпись ── */
+.fan__label {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(7px, 0.9vw, 11px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(220,38,38,0.55);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ── Частицы воздуха ── */
+.fan__airflow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.fan__air-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(239,68,68,0.8);
+    box-shadow: 0 0 5px rgba(239,68,68,0.9);
+    top: 50%;
+    left: 50%;
+    animation: air-fly var(--fan-speed) linear infinite;
+    animation-delay: calc(var(--i, 0) * 0.13s);
+}
+
+.fan__air-particle:nth-child(1)  { --i:0;  --angle:0deg;   }
+.fan__air-particle:nth-child(2)  { --i:1;  --angle:36deg;  }
+.fan__air-particle:nth-child(3)  { --i:2;  --angle:72deg;  }
+.fan__air-particle:nth-child(4)  { --i:3;  --angle:108deg; }
+.fan__air-particle:nth-child(5)  { --i:4;  --angle:144deg; }
+.fan__air-particle:nth-child(6)  { --i:5;  --angle:180deg; }
+.fan__air-particle:nth-child(7)  { --i:6;  --angle:216deg; }
+.fan__air-particle:nth-child(8)  { --i:7;  --angle:252deg; }
+.fan__air-particle:nth-child(9)  { --i:8;  --angle:288deg; }
+.fan__air-particle:nth-child(10) { --i:9;  --angle:324deg; }
+.fan__air-particle:nth-child(11) { --i:10; --angle:15deg;  }
+.fan__air-particle:nth-child(12) { --i:11; --angle:55deg;  }
+.fan__air-particle:nth-child(13) { --i:12; --angle:95deg;  }
+.fan__air-particle:nth-child(14) { --i:13; --angle:135deg; }
+
+@keyframes air-fly {
+    0%   { transform:translate(-50%,-50%) rotate(var(--angle)) translateX(12px); opacity:0; }
+    15%  { opacity:1; }
+    85%  { opacity:0.4; }
+    100% { transform:translate(-50%,-50%) rotate(var(--angle)) translateX(calc(var(--fan-size) * 0.55)); opacity:0; }
+}
+
+/* ── Пыль ── */
+.motors__dust { position:absolute; inset:0; pointer-events:none; z-index:1; }
+
+.dust__particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(220,38,38,0.35);
+    animation: dust-float 7s ease-in-out infinite;
+    animation-delay: calc(var(--d) * 0.35s);
+}
+
+.dust__particle:nth-child(1)  { top:18%; left:12%; --d:0; }
+.dust__particle:nth-child(2)  { top:78%; left:22%; --d:1; }
+.dust__particle:nth-child(3)  { top:33%; left:68%; --d:2; }
+.dust__particle:nth-child(4)  { top:63%; left:83%; --d:3; }
+.dust__particle:nth-child(5)  { top:8%;  left:48%; --d:4; }
+.dust__particle:nth-child(6)  { top:88%; left:58%; --d:5; }
+.dust__particle:nth-child(7)  { top:43%; left:28%; --d:6; }
+.dust__particle:nth-child(8)  { top:53%; left:88%; --d:7; }
+.dust__particle:nth-child(9)  { top:23%; left:38%; --d:0; }
+.dust__particle:nth-child(10) { top:73%; left:8%;  --d:1; }
+.dust__particle:nth-child(11) { top:13%; left:78%; --d:2; }
+.dust__particle:nth-child(12) { top:83%; left:43%; --d:3; }
+.dust__particle:nth-child(13) { top:48%; left:3%;  --d:4; }
+.dust__particle:nth-child(14) { top:28%; left:93%; --d:5; }
+.dust__particle:nth-child(15) { top:68%; left:53%; --d:6; }
+.dust__particle:nth-child(16) { top:3%;  left:33%; --d:7; }
+.dust__particle:nth-child(17) { top:93%; left:73%; --d:0; }
+.dust__particle:nth-child(18) { top:38%; left:18%; --d:1; }
+.dust__particle:nth-child(19) { top:58%; left:63%; --d:2; }
+.dust__particle:nth-child(20) { top:6%;  left:86%; --d:3; }
+
+@keyframes dust-float {
+    0%   { transform:translateY(0) translateX(0); opacity:0; }
+    12%  { opacity:0.8; }
+    55%  { transform:translateY(-25px) translateX(12px); opacity:0.35; }
+    88%  { opacity:0.5; }
+    100% { transform:translateY(-55px) translateX(-8px); opacity:0; }
+}
+
+/* ==========================================
+   МОБИЛЬНЫЙ  ≤ 768px
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* Моторы меньше и не мешают тексту */
+    .fan-unit--1 {
+        top: 1%;
+        left: 0%;
+        --fan-size: clamp(55px, 16vw, 90px);
+    }
+
+    .fan-unit--2 {
+        top: 0%;
+        right: 0%;
+        --fan-size: clamp(45px, 13vw, 75px);
+    }
+
+    .fan-unit--3 {
+        bottom: 1%;
+        --fan-size: clamp(70px, 20vw, 110px);
+    }
+
+    /* Трубы адаптируем */
+    .pipe--wall-left  { top: 14%; height: 50%; }
+    .pipe--wall-right { top: 10%; height: 54%; }
+
+    .pipe--top-left  { top: 9%;  }
+    .pipe--top-right { top: 7%;  }
+
+    .pipe--center-drop { top: 7%; height: 52%; }
+
+    .pipe--bot-left  { bottom: 16%; }
+    .pipe--bot-right { bottom: 16%; }
+
+    /* Скрываем лишние фланцы */
+    .pipe--top-left  .pipe__flange:nth-child(3),
+    .pipe--top-right .pipe__flange:nth-child(3) { display: none; }
+
+    /* Подпись скрываем */
+    .fan__label { display: none; }
+}
+
+/* ==========================================
+   МАЛЕНЬКИЙ  ≤ 480px
+   ========================================== */
+@media (max-width: 480px) {
+
+    /* FAN-02 убираем — нет места */
+    .fan-unit--2        { display: none; }
+    .pipe--top-right    { display: none; }
+    .pipe--wall-right   { display: none; }
+    .node--tr,
+    .node--fan2-h,
+    .node--br           { display: none; }
+
+    /* Правая нижняя труба от центра */
+    .pipe--bot-right { left: 52%; right: 2%; }
+
+    .fan-unit--1 { --fan-size: clamp(55px, 18vw, 80px); }
+    .fan-unit--3 { --fan-size: clamp(65px, 22vw, 95px); }
+
+    /* Правая стена — просто декор */
+    .pipe--wall-right {
+        display: block;
+        right: 2%;
+        top: 10%;
+        height: 55%;
+    }
+}

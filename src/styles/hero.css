@@ -1,0 +1,312 @@
+/* ========================================
+   HERO
+   ======================================== */
+
+   .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a1a 0%, #0d1b2e 50%, #0a1628 100%);
+    z-index: 0;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+    z-index: 0;
+}
+
+.hero__particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(96, 165, 250, 0.6);
+    border-radius: 50%;
+    animation: particle-float linear infinite;
+}
+
+.particle:nth-child(1)  { left: 5%;  top: 20%; animation-duration: 8s;  animation-delay: 0s;   width: 3px; height: 3px; }
+.particle:nth-child(2)  { left: 15%; top: 60%; animation-duration: 12s; animation-delay: 1s;   }
+.particle:nth-child(3)  { left: 25%; top: 35%; animation-duration: 9s;  animation-delay: 2s;   width: 3px; height: 3px; }
+.particle:nth-child(4)  { left: 35%; top: 75%; animation-duration: 11s; animation-delay: 0.5s; }
+.particle:nth-child(5)  { left: 45%; top: 15%; animation-duration: 10s; animation-delay: 3s;   width: 4px; height: 4px; }
+.particle:nth-child(6)  { left: 55%; top: 50%; animation-duration: 8s;  animation-delay: 1.5s; }
+.particle:nth-child(7)  { left: 65%; top: 80%; animation-duration: 13s; animation-delay: 2.5s; width: 3px; height: 3px; }
+.particle:nth-child(8)  { left: 75%; top: 25%; animation-duration: 9s;  animation-delay: 0s;   }
+.particle:nth-child(9)  { left: 85%; top: 65%; animation-duration: 11s; animation-delay: 4s;   width: 3px; height: 3px; }
+.particle:nth-child(10) { left: 92%; top: 40%; animation-duration: 10s; animation-delay: 1s;   }
+.particle:nth-child(11) { left: 10%; top: 90%; animation-duration: 14s; animation-delay: 2s;   width: 4px; height: 4px; }
+.particle:nth-child(12) { left: 30%; top: 10%; animation-duration: 8s;  animation-delay: 3.5s; }
+.particle:nth-child(13) { left: 50%; top: 85%; animation-duration: 12s; animation-delay: 0.5s; width: 3px; height: 3px; }
+.particle:nth-child(14) { left: 70%; top: 5%;  animation-duration: 9s;  animation-delay: 2s;   }
+.particle:nth-child(15) { left: 88%; top: 70%; animation-duration: 11s; animation-delay: 1s;   width: 3px; height: 3px; }
+.particle:nth-child(16) { left: 20%; top: 45%; animation-duration: 10s; animation-delay: 4.5s; }
+.particle:nth-child(17) { left: 40%; top: 55%; animation-duration: 13s; animation-delay: 1.5s; width: 4px; height: 4px; }
+.particle:nth-child(18) { left: 60%; top: 30%; animation-duration: 8s;  animation-delay: 3s;   }
+.particle:nth-child(19) { left: 78%; top: 88%; animation-duration: 12s; animation-delay: 0s;   width: 3px; height: 3px; }
+.particle:nth-child(20) { left: 95%; top: 15%; animation-duration: 9s;  animation-delay: 2.5s; }
+
+.hero__content {
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+    padding: 120px 20px 60px;
+    animation: fadeInUp 1s ease;
+    margin: 0 auto;
+}
+
+/* ========================================
+   HERO BADGE
+   ======================================== */
+
+.hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: #60a5fa;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+:root:not([data-theme="dark"]) .hero__badge {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: rgba(37, 99, 235, 0.22);
+    color: #2563eb;
+}
+
+/* ========================================
+   HERO TITLE
+   ======================================== */
+
+.hero__title {
+    font-size: clamp(50px, 10vw, 100px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+.title__split { color: #ffffff; }
+.title__64    { color: #3b82f6; }
+
+.title__sub {
+    font-size: clamp(16px, 3vw, 28px);
+    letter-spacing: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+:root:not([data-theme="dark"]) .title__split { color: #1e3a5f; }
+:root:not([data-theme="dark"]) .title__64 {
+    color: #2563eb;
+    text-shadow: 0 0 40px rgba(37, 99, 235, 0.25);
+}
+:root:not([data-theme="dark"]) .title__sub {
+    color: #4b7bad;
+    letter-spacing: 6px;
+}
+
+/* ========================================
+   HERO DESCRIPTION
+   ======================================== */
+
+.hero__description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 550px;
+    margin: 0 auto 50px;
+    line-height: 1.8;
+}
+
+:root:not([data-theme="dark"]) .hero__description { color: #4b6a8a; }
+
+/* ========================================
+   HERO BUTTONS
+   ======================================== */
+
+.hero__buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.hero__btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 30px;
+    border-radius: 16px;
+    text-decoration: none;
+    min-width: 270px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.hero__btn:hover { transform: translateY(-4px); }
+
+.hero__btn--ventilation {
+    background: rgba(22, 163, 74, 0.1);
+    border-color: rgba(22, 163, 74, 0.35);
+}
+
+.hero__btn--ventilation:hover {
+    background: rgba(22, 163, 74, 0.2);
+    border-color: rgba(22, 163, 74, 0.7);
+    box-shadow: 0 20px 40px rgba(22, 163, 74, 0.2);
+}
+
+.hero__btn--conditioning {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.35);
+}
+
+.hero__btn--conditioning:hover {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: rgba(37, 99, 235, 0.7);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
+}
+
+:root:not([data-theme="dark"]) .hero__btn {
+    background: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+:root:not([data-theme="dark"]) .hero__btn--ventilation {
+    border-color: rgba(22, 163, 74, 0.5) !important;
+}
+
+:root:not([data-theme="dark"]) .hero__btn--ventilation:hover {
+    background: rgba(255, 255, 255, 0.97) !important;
+    border-color: rgba(22, 163, 74, 0.75) !important;
+    box-shadow: 0 16px 40px rgba(22, 163, 74, 0.18) !important;
+    transform: translateY(-4px);
+}
+
+:root:not([data-theme="dark"]) .hero__btn--conditioning {
+    border-color: rgba(37, 99, 235, 0.45) !important;
+}
+
+:root:not([data-theme="dark"]) .hero__btn--conditioning:hover {
+    background: rgba(255, 255, 255, 0.97) !important;
+    border-color: rgba(37, 99, 235, 0.7) !important;
+    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.18) !important;
+    transform: translateY(-4px);
+}
+
+.btn__icon { font-size: 30px; }
+
+.btn__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.btn__title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.btn__desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn__arrow {
+    margin-left: auto;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.hero__btn:hover .btn__arrow {
+    transform: translateX(5px);
+    color: #ffffff;
+}
+
+:root:not([data-theme="dark"]) .btn__title { color: #1e3a5f !important; }
+:root:not([data-theme="dark"]) .btn__desc  { color: #4b6a8a !important; }
+:root:not([data-theme="dark"]) .btn__arrow { color: #7aafd4 !important; }
+:root:not([data-theme="dark"]) .hero__btn:hover .btn__arrow {
+    color: #1e3a5f !important;
+    transform: translateX(5px);
+}
+
+/* ========================================
+   HERO SCROLL
+   ======================================== */
+
+.hero__scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll__line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+:root:not([data-theme="dark"]) .hero__scroll { color: #7aafd4; }
+:root:not([data-theme="dark"]) .scroll__line {
+    background: linear-gradient(to bottom, rgba(37, 99, 235, 0.5), transparent);
+}
+
+/* ========================================
+   ОБЩИЕ ЗАГОЛОВКИ СЕКЦИЙ
+   ======================================== */
+
+.section__title {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.section__subtitle {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 50px;
+    line-height: 1.7;
+}
+
+:root:not([data-theme="dark"]) .section__title   { color: #1e3a5f; }
+:root:not([data-theme="dark"]) .section__subtitle { color: #4b6a8a; }
